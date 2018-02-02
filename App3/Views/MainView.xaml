@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="App3.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="MenuItemDataTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Symbol="{Binding Icon}" />
+                    <TextBlock Text="{Binding Text}" Margin="18" />
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <SplitView Name="mainSpiltView" OpenPaneLength="150" CompactPaneLength="45" PaneBackground="LightGray" DisplayMode="CompactOverlay" IsPaneOpen="{Binding IsPaneOpen,Mode=TwoWay}">
+            <SplitView.Pane>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Name="hamburgBtn" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" FontSize="24" Command="{Binding HamburgButtonCommand}"></Button>
+                        <TextBlock Margin="10,10,0,0" Text="{Binding HamburgTitle}" />
+                    </StackPanel>
+                    <ListView Grid.Row="1" x:Name="mainListView" ItemsSource="{Binding MenuItems}" IsItemClickEnabled="True" ItemClick="mainListView_ItemClick" ItemTemplate="{StaticResource MenuItemDataTemplate}" />
+                </Grid>
+            </SplitView.Pane>
+            <Frame Name="MainFrame">
+
+            </Frame>
+        </SplitView>
+    </Grid>
+</Page>
